@@ -46,5 +46,5 @@ if (file_exists(BASEDIR.'/Controller/'.$config['route'][0].'.php')){
     echo 'Sayfa bulunumadı!';
 }
 
-
-
+if (isset($_SESSION['error'])) $_SESSION['error'] = null;
+if (isset($_SESSION['post'])) $_SESSION['post'] = null;

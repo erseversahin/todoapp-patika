@@ -7,12 +7,15 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg"><?= lang('Oturum Açın'); ?></p>
 
+                <p class="login-box-msg"><?= lang('Oturum Açın'); ?></p>
+                <?php
+                echo get_session('error')  ? '<div class="alert alert-'.$_SESSION['error']['type'].'">'.$_SESSION['error']['message'].'</div>' : null;
+                ?>
                 <form action="<?= URL.'tr/login'; ?>" method="post">
                     <div class="input-group mb-3">
-                        <?= get_session('hata2'); ?>
-                        <input type="email" class="form-control" name="eposta" placeholder="<?= lang('E-Posta'); ?>">
+
+                        <input type="email" class="form-control" value="<?= $_SESSION['post']['eposta'] ?? '' ?>" name="eposta" placeholder="<?= lang('E-Posta'); ?>">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -20,7 +23,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="sifre" placeholder="<?= lang('Şifreniz'); ?>">
+                        <input type="password" class="form-control" value="<?= $_SESSION['post']['sifre'] ?? '' ?>" name="sifre" placeholder="<?= lang('Şifreniz'); ?>">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
