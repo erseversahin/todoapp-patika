@@ -77,13 +77,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= url('category/add') ?>" class="nav-link">
+                            <a href="<?= url('categories/add') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Yeni Ekle</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= url('category/list') ?>" class="nav-link">
+                            <a href="<?= url('categories/list') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Listele</p>
                             </a>
