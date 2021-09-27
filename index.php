@@ -37,10 +37,11 @@ if (isset($result['route'])){
 
 require BASEDIR.'/language/'.$config['lang'].'.php';
 
-// TODO : isset $config['route'][0] && file_exist....
+
 if (file_exists(BASEDIR.'/Controller/'.$config['route'][0].'.php')){
     require BASEDIR.'/Controller/'.$config['route'][0].'.php';
 }else{
+    // TODO : require BASEDIR.'/Controller/home.php';
     echo 'Sayfa bulunumadı!';
 }
 

@@ -1,5 +1,5 @@
 ## TodoAPP - Projesi
-[Patika](https://patika.dev) için hazırladığım todoapp uygulaması kaynak kodları.
+[Patika](https://patika.dev) PhpBasics todoapp uygulaması.
 
 ### Neler Yaptık?
 - Roting ve İşlevles MVC Yapısı
