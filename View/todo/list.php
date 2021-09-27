@@ -31,30 +31,40 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th style="width: 10px">#</th>
+
                                         <th>Başlık</th>
-                                        <th>Oluşturma Tarihi</th>
-                                        <th>Güncelleme Tarihi</th>
+                                        <th>Kategori</th>
+                                        <th>Başlangıç</th>
+                                        <th>Bitiş</th>
+                                        <th>İlerleme</th>
                                         <th style="width: 40px">İşlem</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php $count = 1; foreach ($data as $key => $value): ?>
-                                    <tr>
-                                        <td><?= $count++; ?>.</td>
+                                    <tr id="row_<?= $value['id'] ?>">
+
                                         <td><?= $value['title'] ?></td>
+                                        <td><?= $value['category_title'] ?></td>
                                         <td>
-                                            <?= $value['created_date']; ?>
+                                            <?= $value['start_date']; ?>
                                         </td>
                                         <td>
-                                            <?= $value['updated_date']; ?>
+                                            <?= $value['end_date']; ?>
                                         </td>
+                                        <td>
+                                            <?= $value['progress']; ?>%
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar progress-bar-danger" style="width: <?= $value['progress']; ?>%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-<?= $value['status'] == 'a' ? 'success' : 'danger'; ?>"><?= $value['status'] == 'a' ? 'Devam Eden' : 'Biten'; ?></span></td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
-                                                <a class="btn btn-sm btn-danger" href="<?= url('categories/remove/'.$value['id']) ?>">
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="removeTodo('<?= $value['id'] ?>')">
                                                     Sil
-                                                </a>
-                                                <a class="btn btn-sm btn-warning" href="<?= url('categories/edit/'.$value['id']) ?>">
+                                                </button>
+                                                <a class="btn btn-sm btn-warning" href="<?= url('todo/edit/'.$value['id']) ?>">
                                                     Güncelle
                                                 </a>
                                             </div>
@@ -78,5 +88,32 @@
 <script src="<?= assets('plugins/jquery/jquery.min.js'); ?>"></script>
 <script src="<?= assets('plugins/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
 <script src="<?= assets('js/adminlte.min.js'); ?>"></script>
+<script src="<?= assets('plugins/sweetalert2/sweetalert2.all.js'); ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        
+    function removeTodo(id){
+        let formData = new FormData();
+        formData.append('id',id);
+        axios.post('<?= url('api/removetodo') ?>', formData).then(res => {
+
+            if (res.data.id){
+
+                let row = document.getElementById('row_'+res.data.id)
+                row.remove();
+
+            }
+            
+            Swal.fire(
+                res.data.title,
+                res.data.msg,
+                res.data.status,
+            );
+            console.log(res)
+        }).catch(err => console.log(err))
+
+    }
+
+</script>
 </body>
 </html>

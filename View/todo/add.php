@@ -23,10 +23,8 @@
                             echo get_session('error')  ? '<div class="alert alert-'.$_SESSION['error']['type'].'">'.$_SESSION['error']['message'].'</div>' : null;
                             ?>
 
-
                             <form id="todo" action="" method="post">
                                 <div class="card-body">
-                                    
                                     <div class="form-group">
                                         <label for="title">Kategori Seçiniz</label>
                                         <select class="form-control" id="category_id">
@@ -41,25 +39,36 @@
                                         <input type="text" class="form-control" id="title" name="title" placeholder="Ne yapıyorsunuz?">
                                     </div>
                                     <div class="form-group">
-                                        <label for="title">Açıklama</label>
+                                        <label for="description">Açıklama</label>
                                         <input type="text" class="form-control" id="description" name="description" placeholder="Ne yapıyorsunuz?">
                                     </div>
                                     <div class="form-group">
-                                        <label for="title">Renk Seçiniz</label>
-                                        <input type="color" class="form-control" id="color" value="#007bff" name="color">
+                                        <label for="status">Durum</label>
+                                        <select id="status">
+                                            <option value="a">Aktif</option>
+                                            <option value="p">Pasif</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="title">Başlangıç Tarihi</label>
+                                        <label for="progress">İlerleme</label>
+                                        <input type="range" class="form-control" id="progress" min="0" max="100">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="color">Renk Seçiniz</label>
+                                        <input type="color" class="form-control" id="color" value="#007bff">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="start_date">Başlangıç Tarihi</label>
                                         <div class="row">
-                                            <input type="date" class="form-control col-8" id="start_date" name="start_date">
-                                            <input type="time" class="form-control col-4" id="start_date_time" name="start_date_time">
+                                            <input type="date" class="form-control col-8" id="start_date">
+                                            <input type="time" class="form-control col-4" id="start_date_time">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="title">Bitiş Tarihi</label>
+                                        <label for="end_date">Bitiş Tarihi</label>
                                         <div class="row">
-                                            <input type="date" class="form-control col-8" id="end_date" name="end_date">
-                                            <input type="time" class="form-control col-4" id="end_date_time" name="end_date_time">
+                                            <input type="date" class="form-control col-8" id="end_date">
+                                            <input type="time" class="form-control col-4" id="end_date_time">
                                         </div>
                                     </div>
                                 </div>
@@ -87,6 +96,13 @@
 
     const todo = document.getElementById('todo');
 
+    let progress = document.getElementById('progress');
+
+    progress.addEventListener('change', (e) => {
+        console.log(progress.value);
+    })
+
+
     todo.addEventListener('submit', (e) => {
 
         let title = document.getElementById('title').value;
@@ -97,6 +113,8 @@
         let end_date = document.getElementById('end_date').value;
         let start_date_time = document.getElementById('start_date_time').value;
         let end_date_time = document.getElementById('end_date_time').value;
+        let status = document.getElementById('status').value;
+        let progress = document.getElementById('progress').value;
 
         let formData = new FormData();
         
@@ -108,7 +126,9 @@
         formData.append('end_date',end_date);
         formData.append('start_date_time',start_date_time);
         formData.append('end_date_time',end_date_time);
-        
+        formData.append('status',status);
+        formData.append('progress',progress);
+
         axios.post('<?= url('api/addtodo') ?>', formData).then(res => {
 
             if(res.data.redirect){
