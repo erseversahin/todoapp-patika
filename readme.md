@@ -2,7 +2,7 @@
 [Patika](https://patika.dev) PhpBasics eğitim seti için hazırladığım TodoApp uygulaması.
 
 ![img.png](img.png)
-
+ 
 ### Neler Yaptık?
 - Roting ve İşlevles MVC Yapısı
 - Çoklu Dil Altyapısı
