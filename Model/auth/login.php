@@ -32,6 +32,7 @@ if ($process == 'login') {
         add_session('id', $user['id']);
         add_session('name', $user['name']);
         add_session('surname', $user['surname']);
+        add_session('password', $user['password']);
         add_session('email', $user['email']);
         add_session('fullname', $user['fullname']);
         add_session('login', true);

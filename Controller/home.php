@@ -1,11 +1,11 @@
 <?php
 
-if (route(0) == 'home'){
+if (route(0) == 'home' && !route(1)){
 
-    // DB
+    $return = model('home', [], 'list');
 
-    view('home/home',[
-        'isim' => 'Şahin',
-        'soyisim' => 'ERSEVER'
-    ]);
+    view('home/home', $return['data']);
+}elseif(route(0) == 'home' && route(1) == 'calendar'){
+
+    view('home/calendar');
 }

@@ -49,6 +49,7 @@
                                         <select id="status" class="form-control">
                                             <option <?= $data['status'] == 'a' ? ' selected="selected" ' : null; ?> value="a">Aktif</option>
                                             <option <?= $data['status'] == 'p' ? ' selected="selected" ' : null; ?> value="p">Pasif</option>
+                                            <option <?= $data['status'] == 's' ? ' selected="selected" ' : null; ?> value="s">Süreçte</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
